@@ -1,5 +1,48 @@
 var express = require('express');
 var app = express();
+import axios, { AxiosRequestConfig, AxiosPromise } from "axios";
+import qs from "qs";
+
+type SF_SESSION_MODEL = {
+    access_token: string
+};
+const username = ‘integration.user@eanetworks_dev_sb.com’;
+const password = ‘p6W)sgvAmafb’;
+const baseLoginUrl = https://test.salesforce.com/services/oauth2/token;
+const grant_type = 'password';
+const client_id = '3MVG9z6NAroNkeMmdyz3SJ3xxoq1mhwaaT3RXRKRwW8hq4i5o2SxbCIbgHI4_P1SVVoknvJOaxipdV.4ism2T';
+const client_secret = '9B5532F3B0A7F0D1E9043F35BC64D887630F9F57C0F67C32C099FE91DB3968C5';
+
+export let sfSessionInfo: SF_SESSION_MODEL = {
+    access_token: undefined
+};
+
+export const salesforceLogin = async () => {
+    try {
+
+        const param = qs.stringify({
+            grant_type,
+            client_id,
+            client_secret,
+            username,
+            password,
+        });
+
+        const config: AxiosRequestConfig = {
+            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }
+        };
+        const response = await axios.post(url, param, config);
+        const { data } = response;
+        const { access_token } = data;
+        sfSessionInfo = { access_token };
+        console.log("Logged in into salesforce");
+    } catch (error) {
+        console.log(url, error, "salesforceLogin");
+    }
+
+};
+
+
 
 app.get('/', function(request, response) {
     response.send('<h1>Hello Node!</h1>');
