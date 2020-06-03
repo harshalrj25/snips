@@ -2,10 +2,10 @@ import os
 import csv
 
 # path format is for windows
-  path = 'D:\\foldername\\subfoldername'
+path = 'D:\\foldername\\subfoldername'
   
 # if you are on using macOS uncomment and use below path format, and comment out the above one
-# path = '/Users/iosdev1/youtube/exportFilePath/dummyData'
+#path = '/Users/iosdev1/youtube/exportFilePath/dummyData'
 
 with open('YOUR_OUTPUT_FILE_xlsx.csv', 'w') as csvfile:
   writer = csv.writer(csvfile)
